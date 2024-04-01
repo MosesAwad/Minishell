@@ -6,11 +6,11 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 03:11:35 by mawad             #+#    #+#             */
-/*   Updated: 2024/02/29 18:09:37 by mawad            ###   ########.fr       */
+/*   Updated: 2024/03/04 17:51:46 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "../minishell.h"
 
 static int	entry_count(char *dir_name)
 {
@@ -74,10 +74,8 @@ t_binlist	*assign_binlist(void)
 	full_list[3].sublist = get_dir_contents("/usr/sbin");
 	full_list[4].sublist = get_dir_contents("/usr/local/bin");
 	full_list[5].sublist = get_dir_contents("/usr/local/bdsfin");
-
 	return (full_list);
 }
-
 
 void	delete_binlist(t_binlist *binlist)
 {
@@ -85,6 +83,8 @@ void	delete_binlist(t_binlist *binlist)
 	int	j;
 
 	i = 0;
+	if (!binlist)
+		return ;
 	while (i < 6)
 	{
 		j = 0;

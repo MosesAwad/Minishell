@@ -6,11 +6,11 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:10:49 by mawad             #+#    #+#             */
-/*   Updated: 2024/02/23 21:06:36 by mawad            ###   ########.fr       */
+/*   Updated: 2024/03/03 10:49:15 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../minishell.h"
+#include "../../minishell.h"
 
 //If I have HI=5 then I do export HI, nothing happens.
 //For detecting that scenario, go to function bool_no_update()
@@ -25,6 +25,7 @@ int	bool_no_update(char *s1, char *s2)
 		return (1);
 	return (0);
 }
+
 //applies the bool_no_update to the export arguments
 int	check_no_update(char **env_list, char *str)
 {

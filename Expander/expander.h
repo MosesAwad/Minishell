@@ -1,9 +1,20 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 15:58:53 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/04 15:58:53 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef EXPANDER_H
 # define EXPANDER_H
 
 //expand_str_or_toklist.c
+char	*q_expand_str(char *str, char *env[], int exit_status);
 char	*expand_str(char *str, char *env[], int exit_status);
 void	expand_toklist(t_token *tok_list, char *env[], int exit_status);
 
@@ -17,6 +28,7 @@ char	*detector(char *str, int s_ind, char *env[]);
 
 //expander_cases3.c
 char	*copy_exit_status(char *str, int exit_status);
+char	*delnumber(char *str, int state);
 
 //expander_utils.c
 int		trailor_validity(char c);

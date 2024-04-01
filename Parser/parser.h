@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moses <moses@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:50:12 by moses             #+#    #+#             */
-/*   Updated: 2024/02/16 04:21:59 by moses            ###   ########.fr       */
+/*   Updated: 2024/03/03 10:41:53 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_ASTree	*command1(t_token **token_list);
 t_ASTree	*command2(t_token **token_list);
 
 //3-2-command_level_utils.c
-t_ASTree	*case_checker1(t_ASTree *rdrlist1, t_ASTree *rdrlist2, t_ASTree *smplcmdnode);
+t_ASTree	*case_checker1(t_ASTree *rdrlist1, t_ASTree *rdrlist2,
+				t_ASTree *smplcmdnode);
 t_ASTree	*case_checker2(t_ASTree *rdrlist2, t_ASTree *smplcmdnode);
 t_ASTree	*assign_rdrlist2(t_ASTree *smplcmdnode);
 

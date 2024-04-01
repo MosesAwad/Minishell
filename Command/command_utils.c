@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:50:43 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:50:43 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -7,7 +18,7 @@
 char	**get_path_list(t_minishell *shell)
 {
 	char	**buffer;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (shell->env[i])
@@ -64,4 +75,27 @@ char	*check_access(t_minishell *shell, t_command *cmd)
 		free(path_list[i++]);
 	free(path_list);
 	return (full_path);
+}
+
+void	set_up_command(t_ASTree *node, t_minishell *shell, t_command *cmd)
+{
+	int	arg_count;
+
+	arg_count = count_cmd_args(node, shell);
+	cmd->cmd_args = (char **)malloc(sizeof(char *) * (arg_count + 1));
+	if (!cmd->cmd_args)
+	{
+		warn_message();
+		return ;
+	}
+	set_up_cmd_members(node, shell, cmd);
+}
+
+void	print_cmd_args(t_command *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd->cmd_args[i])
+		printf("%s\n", cmd->cmd_args[i++]);
 }

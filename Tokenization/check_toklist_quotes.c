@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_toklist_quotes.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:42:08 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:42:08 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -8,15 +19,17 @@ static int	check_tok_quotes(char *str)
 	int	quote;
 
 	i = 0;
-	state = STATE_GENERAL; 
+	state = STATE_GENERAL;
 	while (str[i])
 	{
-		if ((str[i] == CHAR_SQUOTE || str[i] == CHAR_DQUOTE) && (state == STATE_GENERAL))
+		if ((str[i] == CHAR_SQUOTE || str[i] == CHAR_DQUOTE)
+			&& (state == STATE_GENERAL))
 		{
 			quote = str[i];
 			state = set_state(quote);
 		}
-		else if ((str[i] == CHAR_SQUOTE || str[i] == CHAR_DQUOTE) && (state != STATE_GENERAL))
+		else if ((str[i] == CHAR_SQUOTE || str[i] == CHAR_DQUOTE)
+			&& (state != STATE_GENERAL))
 		{
 			if (str[i] == quote)
 				state = STATE_GENERAL;
@@ -38,7 +51,8 @@ int	check_list_quotes(t_token *tok_list)
 		quote = check_tok_quotes(tok_list->data);
 		if (quote != -1)
 		{
-			printf("Unexcpected EOF while looking for a matching '%c'\n", quote);
+			ft_dprintf(2, "Unexcpected EOF while looking for a matching '%c'\n",
+				quote);
 			return (0);
 		}
 		tok_list = tok_list->next;

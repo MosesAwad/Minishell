@@ -37,7 +37,6 @@ t_ASTree	*redirlist(t_token **token_list)
 	return (NULL);
 }
 
-
 t_ASTree	*redirlist1(t_token	**token_list)
 {
 	char		*filename;

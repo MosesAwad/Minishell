@@ -6,11 +6,11 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 20:32:54 by mawad             #+#    #+#             */
-/*   Updated: 2024/02/23 20:52:11 by mawad            ###   ########.fr       */
+/*   Updated: 2024/03/03 10:47:53 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../minishell.h"
+#include "../../minishell.h"
 
 int	check_no_equal(char *str)
 {
@@ -33,7 +33,7 @@ int	ft_env(t_minishell *shell)
 	while (shell->env[i])
 	{
 		if (!check_no_equal(shell->env[i]))
-			printf("%s\n", shell->env[i]);
+			ft_dprintf(1, "%s\n", shell->env[i]);
 		i++;
 	}
 	return (shell->exit_status = 0, 0);

@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:26:38 by moses             #+#    #+#             */
-/*   Updated: 2024/02/08 02:02:42 by mawad            ###   ########.fr       */
+/*   Updated: 2024/03/04 15:58:27 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,6 @@ void	add_to_list(t_token **lst, t_token *new)
 	}
 }
 
-void	print_token_list(t_token *list)
-{
-	int	i;
-
-	i = 0;
-	while (list != NULL)
-	{
-		printf("--TOKEN %d--\n", i);
-		if (list->type == CHAR_PIPE)
-			printf("token type is: CHAR_PIPE\n");
-		else if (list->type == CHAR_SQUOTE)
-			printf("token type is: CHAR_SQUOTE\n");
-		else if (list->type == CHAR_DQUOTE)
-			printf("token type is: CHAR_DQUOTE\n");
-		else if (list->type == CHAR_RDIN)
-			printf("token type is: CHAR_RDIN\n");
-		else if (list->type == CHAR_RDOUT)
-			printf("token type is: CHAR_RDOUT\n");
-		else if (list->type == CHAR_HDOC)
-			printf("token type is: CHAR_HDOC\n");
-		else if (list->type == CHAR_APND)
-			printf("token type is: CHAR_APND\n");
-		else if (list->type == CHAR_GEN)
-			printf("token type is: CHAR_GEN\n");
-		printf("token data is: %s\n", list->data);
-		printf("\n");
-		list = list->next;
-		i++;
-	}
-}
-
 void	add_node_data(t_token *tok_node, t_tokenType type)
 {
 	if (type == CHAR_PIPE)
@@ -99,3 +68,34 @@ void	delete_list(t_token *token_list)
 		free(token_list->data);
 	free(token_list);
 }
+
+// void	print_token_list(t_token *list)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (list != NULL)
+// 	{
+// 		printf("--TOKEN %d--\n", i);
+// 		if (list->type == CHAR_PIPE)
+// 			printf("token type is: CHAR_PIPE\n");
+// 		else if (list->type == CHAR_SQUOTE)
+// 			printf("token type is: CHAR_SQUOTE\n");
+// 		else if (list->type == CHAR_DQUOTE)
+// 			printf("token type is: CHAR_DQUOTE\n");
+// 		else if (list->type == CHAR_RDIN)
+// 			printf("token type is: CHAR_RDIN\n");
+// 		else if (list->type == CHAR_RDOUT)
+// 			printf("token type is: CHAR_RDOUT\n");
+// 		else if (list->type == CHAR_HDOC)
+// 			printf("token type is: CHAR_HDOC\n");
+// 		else if (list->type == CHAR_APND)
+// 			printf("token type is: CHAR_APND\n");
+// 		else if (list->type == CHAR_GEN)
+// 			printf("token type is: CHAR_GEN\n");
+// 		printf("token data is: %s\n", list->data);
+// 		printf("\n");
+// 		list = list->next;
+// 		i++;
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:01:24 by mawad             #+#    #+#             */
-/*   Updated: 2024/02/28 23:43:40 by mawad            ###   ########.fr       */
+/*   Updated: 2024/03/05 12:11:16 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static char	**copy_envlist(char *env[])
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], "PATH", 5))
-			buffer[i] = ft_strdup(env[i]);
+		buffer[i] = ft_strdup(env[i]);
 		i++;
 	}
 	buffer[i] = NULL;
@@ -63,10 +62,10 @@ int	in_order(char *str1, char *str2)
 {
 	int	j;
 
-	j = 0;
-	while (ft_strncmp(str1, str2, j))
+	j = 1;
+	while (!ft_strncmp(str1, str2, j))
 		j++;
-	if (str1[j] > str2[j])
+	if (str1[j - 1] > str2[j - 1])
 		return (0);
 	return (1);
 }
@@ -92,7 +91,7 @@ void	add_prefix(char *env[])
 				ft_putchar_fd(env[i][j++], STDOUT_FILENO);
 			ft_putstr_fd("\"", STDOUT_FILENO);
 		}
-		printf("\n");
+		ft_dprintf(1, "\n");
 		i++;
 	}
 }

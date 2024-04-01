@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ASTree_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moses <moses@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:22 by moses             #+#    #+#             */
-/*   Updated: 2024/02/16 04:39:30 by moses            ###   ########.fr       */
+/*   Updated: 2024/03/04 15:58:37 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,51 +69,51 @@ void	delete_node(t_ASTree *node)
 	free(node);
 }
 
-void    print_tree(t_ASTree *node, int space)
-{
-    int count = 10;
+// void    print_tree(t_ASTree *node, int space)
+// {
+//     int count = 10;
 
-    if (!node)
-        return ;
-    space += count;
+//     if (!node)
+//         return ;
+//     space += count;
 
-    print_tree(node->right, space);
+//     print_tree(node->right, space);
 
-    printf("\n");
-    for (int i = count; i < space; i++)
-    {
-        printf(" ");
-    }
-    if (node->type == NODE_PIPE)
-        printf("|\n");
-    else if (node->type == NODE_RDRGEN)
-		printf("REDIRGEN\n");
-	else if (node->type == NODE_RDIN)
-	{
-		printf("RDIN");
-		printf("(%s)\n", node->data);
-	}
-	else if (node->type == NODE_RDOUT)
-	{
-		printf("RDOUT");
-		printf("(%s)\n", node->data);
-	}
-	else if (node->type == NODE_APND)
-	{
-		printf("APND");
-		printf("(%s)\n", node->data);
-	}
-	else if (node->type == NODE_HDOC)
-	{
-		printf("HDOC");
-		printf("(%s)\n", node->data);
-	}
-    else
-	{	
-		if (node->data)
-			printf("%s\n", node->data);
-		else
-			printf("NULL (node data)\n");
-	}
-    print_tree(node->left, space);
-}
+//     printf("\n");
+//     for (int i = count; i < space; i++)
+//     {
+//         printf(" ");
+//     }
+//     if (node->type == NODE_PIPE)
+//         printf("|\n");
+//     else if (node->type == NODE_RDRGEN)
+// 		printf("REDIRGEN\n");
+// 	else if (node->type == NODE_RDIN)
+// 	{
+// 		printf("RDIN");
+// 		printf("(%s)\n", node->data);
+// 	}
+// 	else if (node->type == NODE_RDOUT)
+// 	{
+// 		printf("RDOUT");
+// 		printf("(%s)\n", node->data);
+// 	}
+// 	else if (node->type == NODE_APND)
+// 	{
+// 		printf("APND");
+// 		printf("(%s)\n", node->data);
+// 	}
+// 	else if (node->type == NODE_HDOC)
+// 	{
+// 		printf("HDOC");
+// 		printf("(%s)\n", node->data);
+// 	}
+//     else
+// 	{	
+// 		if (node->data)
+// 			printf("%s\n", node->data);
+// 		else
+// 			printf("NULL (node data)\n");
+// 	}
+//     print_tree(node->left, space);
+// }

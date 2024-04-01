@@ -12,6 +12,13 @@
 
 #include "../minishell.h"
 
+static int	check_quotes(char c)
+{
+	if (c == CHAR_SQUOTE || c == CHAR_DQUOTE)
+		return (1);
+	return (0);
+}
+
 static int	count_quotes(char *str, int state)
 {
 	int	i;
@@ -22,18 +29,18 @@ static int	count_quotes(char *str, int state)
 	count = 0;
 	while (str[i])
 	{
-		if ((str[i] == CHAR_SQUOTE || str[i] == CHAR_DQUOTE) && (state == STATE_GENERAL))
+		if (check_quotes(str[i]) && (state == STATE_GENERAL))
 		{
 			quote = str[i];
 			state = set_state(quote);
 			count++;
 		}
-		else if ((str[i] == CHAR_SQUOTE || str[i] == CHAR_DQUOTE) && (state != STATE_GENERAL))
+		else if (check_quotes(str[i]) && (state != STATE_GENERAL))
 		{
 			if (str[i] == quote)
 			{
-				count++;
 				state = STATE_GENERAL;
+				count++;
 			}
 		}
 		i++;
@@ -61,9 +68,9 @@ static void	copy_stripped(char *buffer, char *str, int state)
 		else if ((str[i] == CHAR_SQUOTE || str[i] == CHAR_DQUOTE)
 			&& (state != STATE_GENERAL) && str[i] == quote)
 		{
-				state = STATE_GENERAL;
-				i++;
-				continue ;
+			state = STATE_GENERAL;
+			i++;
+			continue ;
 		}
 		buffer[j++] = str[i++];
 	}
@@ -79,24 +86,8 @@ char	*strip_quotes(char *str)
 		return (NULL);
 	sub_len = count_quotes(str, STATE_GENERAL);
 	buffer = (char *)malloc(1 * (ft_strlen(str) - sub_len + 1));
-	// if (!buffer)
-	// 	return (warn_message(), NULL);
+	if (!buffer)
+		return (warn_message(), NULL);
 	copy_stripped(buffer, str, STATE_GENERAL);
-	return (free(str), buffer);
+	return (buffer);
 }
-
-// int main()
-// {
-// 	char beta[] = "\"hel'lo'\"Tho'mp'son\"l'ol\"";
-
-// 	char *str = ft_strdup(beta);
-
-// 	printf("count of quotes is %d\n\n", count_quotes(str, STATE_GENERAL));
-
-// 	char *stripped_str = strip_quotes(str);
-// 	printf("stripped string is:\n%s\n", stripped_str);
-
-// 	free(stripped_str);
-
-// 	return (0);
-// }

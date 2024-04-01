@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:50:10 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:50:10 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include "../../minishell.h"
+#include "../../minishell.h"
 
 //If you have a variable like HI=2 in your env list
 //but then you say unset HI=23. HI=2 remains in your
@@ -17,7 +28,7 @@
 //gonna work. You have to say unset HI only! Also unset
 //can also takes multiple arguments at once, so you can
 //unset multiple environment variables at a time.
-static int	bool_key_match(char *s1, char *s2)
+static int	bool_uns_key_match(char *s1, char *s2)
 {
 	char	*temp;
 	int		i;
@@ -44,7 +55,7 @@ static int	is_key_match(char **env_list, char *str)
 	i = 0;
 	while (env_list[i])
 	{
-		if (bool_key_match(env_list[i], str))
+		if (bool_uns_key_match(env_list[i], str))
 			return (1);
 		i++;
 	}
@@ -67,7 +78,7 @@ static char	**rmv_from_list(char **env_list, char *str)
 	i = 0;
 	while (env_list[i])
 	{
-		if (!bool_key_match(env_list[i], str))
+		if (!bool_uns_key_match(env_list[i], str))
 		{
 			len = ft_strlen(env_list[i]);
 			buffer[j] = (char *)malloc(len + 1);
@@ -100,7 +111,7 @@ static int	valid_syntax(char *str)
 
 	i = 0;
 	if (!(str[i] == '_' || ft_isalpha(str[i])))
-			return (0);
+		return (0);
 	i++;
 	while (str[i])
 	{
@@ -126,7 +137,8 @@ int	ft_unset(t_minishell *shell, t_command *cmd)
 		}
 		else
 		{
-			printf("-minishell: unset: '%s': not a valid identifier\n", cmd->cmd_args[i]);
+			ft_dprintf(2, "-minishell: unset: '%s': not a valid identifier\n",
+				cmd->cmd_args[i]);
 			shell->exit_status = 1;
 		}
 		i++;

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_handling_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:37:20 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:37:20 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -23,7 +34,6 @@ void	memset_files_arr(t_command *cmd)
 	int	i;
 
 	i = 0;
-	// printf("This is the cmd->f_amnt: %d\n", cmd->f_amnt);
 	while (i < cmd->f_amnt)
 	{
 		cmd->files[i].fname = NULL;
@@ -88,7 +98,7 @@ void	error_close_fds(t_command *cmd)
 	i = 0;
 	while (i < cmd->f_amnt && cmd->files[i].fname != NULL)
 	{
-		if (cmd->files[i].fd != -1)
+		if (!(cmd->files[i].fd == -1 || cmd->files[i].fd == -2))
 			close(cmd->files[i].fd);
 		i++;
 	}

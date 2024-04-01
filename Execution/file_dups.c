@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_dups.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:36:36 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:36:36 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -68,7 +79,7 @@ void	regular_dup(t_command *cmd)
 	{
 		close(cmd->piperead);
 		close(cmd->pipewrite);
-		close(cmd->copy_rd_fd);		
+		close(cmd->copy_rd_fd);
 	}
 	close(cmd->save_stdout);
 	close(cmd->save_stdin);

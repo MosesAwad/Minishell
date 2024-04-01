@@ -6,23 +6,11 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 22:34:06 by mawad             #+#    #+#             */
-/*   Updated: 2024/02/23 22:36:38 by mawad            ###   ########.fr       */
+/*   Updated: 2024/03/02 19:08:30 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static void	delete_2d_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
 
 static void	delete_fdata(t_command *cmd)
 {
@@ -77,8 +65,10 @@ void	delete_pipe_command(t_command *cmd)
 		close(cmd->fd_out);
 	if (cmd->append_f)
 		close(cmd->fd_apnd);
-	close(cmd->save_stdout);
-	close(cmd->save_stdin);
+	if (cmd->save_stdout)
+		close(cmd->save_stdout);
+	if (cmd->save_stdin)
+		close(cmd->save_stdin);
 	free(cmd->rdin_f);
 	free(cmd->rdout_f);
 	free(cmd->append_f);

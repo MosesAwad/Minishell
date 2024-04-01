@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:38:29 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:38:29 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -41,7 +52,8 @@ int	in_env_string(char *str1, char *env_str)
 	int	j;
 
 	j = 0;
-	while ((env_str[j] != '=') && (str1[j] == env_str[j]))
+	while ((env_str[j] != '=') && (str1[j] == env_str[j])
+		&& str1[j] && env_str[j])
 		j++;
 	if (env_str[j] == '=')
 		return (j);

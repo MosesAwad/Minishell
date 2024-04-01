@@ -1,10 +1,20 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_cases3.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:38:16 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:38:16 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
 //Minus two because I am going to delete from the string
 //the $ sign and the '?' mark itself.
-static int		expand_exstat_len(char *str, int exit_status)
+static int	expand_exstat_len(char *str, int exit_status)
 {
 	char	*buffer;
 	int		i;
@@ -15,7 +25,7 @@ static int		expand_exstat_len(char *str, int exit_status)
 	buffer = ft_itoa(exit_status);
 	while (str[i])
 		i++;
-	len =  ft_strlen(buffer) + i - 2;	
+	len = ft_strlen(buffer) + i - 2;
 	return (free(buffer), len);
 }
 
@@ -61,4 +71,30 @@ char	*copy_exit_status(char *str, int exit_status)
 		buffer[j++] = str[i++];
 	buffer[j] = '\0';
 	return (free(extstat_str), buffer);
+}
+
+//This function is to handle cases like
+//echo "heelo" "$42" which outputs heelo 2.
+//Dont worry about it interfering with expansion
+//of environment variables, that's because an
+//environment variable's name is not supposed to
+//start with a number. Thus, if that is the case
+char	*delnumber(char *str, int state)
+{
+	int		i;
+	int		j;
+	char	*buffer;
+
+	i = 0;
+	j = 0;
+	buffer = (char *)malloc(ft_strlen(str) - 2 + 1);
+	while (str[i])
+	{
+		state = choose_state2(str[i], state);
+		if (str[i] == '$' && state != IN_SQUOTE)
+			i += 2;
+		buffer[j++] = str[i++];
+	}
+	buffer[j] = '\0';
+	return (buffer);
 }

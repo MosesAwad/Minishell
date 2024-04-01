@@ -36,37 +36,25 @@ static void	hdoc_handling(t_ASTree *rdrnode, t_command *cmd)
 int	redir_handling(t_ASTree *node, t_minishell *shell, t_command *cmd)
 {
 	init_delims_and_file_arr(node->right, cmd);
-
-	// printf("\033[0;34m");
-	// printf("This is the initialized fdata struct\n");
-	// print_fdata(cmd);
-	// printf("\033[0m");
-
-	
 	if (cmd->hdoc_amnt)
 	{
 		hdoc_handling(node->right, cmd);
 		hdoc(shell, cmd);
+		if (g_sigstat == OUT_HDOC)
+		{
+			shell->exit_status = 130;
+			g_sigstat = IN_SHELL;
+			return (0);
+		}
 	}
 	if (cmd->f_amnt)
 	{
 		if (!file_handling(node, shell, cmd))
 		{
 			error_close_fds(cmd);
-			//free everything and exit process
-			//or return a flag and free
 			return (0);
 		}
 	}
-	//If we reach here, it means all went well, so at this point set
-	//mode and assign the right file name to either rd_outf and the right
-	//fd to fd_out. Choose between append and rdout, whichever comes last.
-	//Same for hdoc and rdin. If hdoc comes after rdin, then I guess I can
-	//still assign the fdin to char *fd_in but the mode defientely has to
-	//be set to MODE_HDOC and later when we dup, we dont dup the infile. In
-	//order to avoid freeing it, it's best to keep it as NULL. Idk, doesnt
-	//mateer what you choose. The point is, we have to let hdoc write to the
-	//STDOUT or to the pipe, not a redirected STDIN or the STDIN itself.
 	files_setup(node->right, cmd);
 	return (1);
 }

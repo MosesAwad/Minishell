@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/03 10:39:27 by mawad             #+#    #+#             */
+/*   Updated: 2024/03/03 10:39:27 by mawad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 static char	*choose_cases1(int exit_status, char *str, int i)
 {
@@ -11,6 +21,11 @@ static char	*choose_cases1(int exit_status, char *str, int i)
 	if (str[i] && str[i] == '?')
 	{
 		buffer = copy_exit_status(str, exit_status);
+		return (buffer);
+	}
+	if (str[i] && ft_isdigit(str[i]))
+	{
+		buffer = delnumber(str, STATE_GENERAL);
 		return (buffer);
 	}
 	while (trailor_validity(str[i + j]) && str[i + j])
@@ -93,13 +108,13 @@ char	*expansion(char *str, char *env[], int exit_status)
 
 	if (!str)
 		return (NULL);
-	expansion = str;
+	expansion = ft_strdup(str);
 	i = 0;
 	target_count = count_targets(str);
 	while (i < target_count)
 	{
 		expansion = expand_unit(expansion, env,
-			exit_status, STATE_GENERAL);
+				exit_status, STATE_GENERAL);
 		i++;
 	}
 	return (expansion);

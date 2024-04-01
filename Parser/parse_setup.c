@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_setup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moses <moses@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:11:59 by moses             #+#    #+#             */
-/*   Updated: 2024/02/16 04:38:17 by moses            ###   ########.fr       */
+/*   Updated: 2024/03/04 19:51:19 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 	// <command>		  	  	::=		<redirection list1> <simple command>
 	//							|		<redirection list2>
 
-	// <simple command>			::=		<pathname> <redirection list> <token list>
+	// <simple command>			::=		<pathname><redirection list><token list>
 
 	// <token list>				::=		<token> <redirection list> <token list>
 	// 							|		(EMPTY)
@@ -63,15 +63,21 @@ int	base_case(t_tokenType tok_type, t_token **tok_node, char **data)
 	return (1);
 }
 
-static void	ast_parse_messages(t_minishell *shell)
+static void	ast_parse_messages(t_minishell *shell, t_token *head)
 {
-	t_token *next;
+	t_token	*next;
 
 	next = (shell->tok_list)->next;
+	if (head->type == CHAR_PIPE)
+	{
+		ft_dprintf(2, "syntax error near unexpected token '|'\n");
+		shell->exit_status = 2;
+		return ;
+	}
 	if (next)
-		printf("syntax error near unexpected token '%s'\n", next->data);
+		ft_dprintf(2, "syntax error near unexpected token '%s'\n", next->data);
 	else
-		printf("syntax error near unexpected token 'newline'\n");
+		ft_dprintf(2, "syntax error near unexpected token 'newline'\n");
 	shell->exit_status = 2;
 }
 
@@ -86,7 +92,7 @@ int	generate_ast(t_minishell *shell)
 	shell->ast = cmdline(&(shell->tok_list));
 	if ((shell->tok_list) != NULL)
 	{
-		ast_parse_messages(shell);
+		ast_parse_messages(shell, save);
 		return (shell->tok_list = save, 0);
 	}
 	return (shell->tok_list = save, 1);
