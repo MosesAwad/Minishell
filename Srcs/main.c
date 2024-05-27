@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:09:52 by moses             #+#    #+#             */
-/*   Updated: 2024/03/05 13:17:41 by mawad            ###   ########.fr       */
+/*   Updated: 2024/05/27 12:39:08 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_sigstat = IN_SHELL;
 
 void	warn_message(void)
 {
-	ft_putstr_fd("Warning: Insuffcient memory", 2);
+	ft_putstr_fd("Warning: Insufficient memory", 2);
 	ft_putstr_fd(". Undefined behavior to be expected\n", 2);
 }
 
