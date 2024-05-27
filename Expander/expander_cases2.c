@@ -40,8 +40,8 @@ static int	get_diff_len(char *env)
 	return (add_len - sub_len);
 }
 
-//THIS FUNCTION DETECTS WHETHER THE TRAILOR OF THE ${ IS
-//AVAILABLE IN THE ENVAR LIST OR NOT. IF IT IS, IT GOES
+//THIS FUNCTION DETECTS WHETHER THE TRAILOR OF THE $ SIGN
+//IS AVAILABLE IN THE ENVAR LIST OR NOT. IF IT IS, IT GOES
 //OVER TO COPIER, OTHERWISE IT RETURNS NULL.
 char	*detector(char *str, int s_ind, char *env[])
 {

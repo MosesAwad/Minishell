@@ -77,33 +77,28 @@ char	*delpotenvar(char *str, int state)
 	return (buffer[j] = '\0', buffer);
 }
 
-//DEL DOLLAR ARE STANDALONE DOLLARS THAT HAVE TO BE DELETED. THEY ARE EXPLAINED
-//IN THE NOTES OF THE keep_standalone() FUNCTION ABOVE. AN EXAMPLE OF A STAND
-//ALONE DOLLAR THAT HAS TO BE DELETED IS [${${lol] or [${${]. IN THESE SCENARIOS
-//THE FIRST DOLLAR SIGNS HAVE TO BE DELETED BECAUSE THEY ARE NOT FOLLOWED BY A
-//NULL TERMINATOR OR A WHITESPACE, INSTEAD THEY ARE FOLLOWED BY ANOTHER ${.
-char	*deldollar(char *str, int state)
-{
-	int		i;
-	int		j;
-	char	*buffer;
+// char	*deldollar(char *str, int state)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*buffer;
 
-	buffer = (char *)malloc(1 * (ft_strlen(str) - 1 + 1));
-	if (!buffer)
-		return (warn_message(), NULL);
-	j = 0;
-	i = 0;
-	while (str[i])
-	{
-		state = choose_state2(str[i], state);
-		if (not_stand_alone(str[i], str[i + 1], state))
-		{
-			i += 1;
-			break ;
-		}
-		buffer[j++] = str[i++];
-	}
-	while (str[i])
-		buffer[j++] = str[i++];
-	return (buffer[j] = '\0', buffer);
-}
+// 	buffer = (char *)malloc(1 * (ft_strlen(str) - 1 + 1));
+// 	if (!buffer)
+// 		return (warn_message(), NULL);
+// 	j = 0;
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		state = choose_state2(str[i], state);
+// 		if (not_stand_alone(str[i], str[i + 1], state))
+// 		{
+// 			i += 1;
+// 			break ;
+// 		}
+// 		buffer[j++] = str[i++];
+// 	}
+// 	while (str[i])
+// 		buffer[j++] = str[i++];
+// 	return (buffer[j] = '\0', buffer);
+// }

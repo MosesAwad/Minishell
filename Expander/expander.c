@@ -31,10 +31,7 @@ static char	*choose_cases1(int exit_status, char *str, int i)
 	while (trailor_validity(str[i + j]) && str[i + j])
 		j++;
 	if (j == 0)
-	{
-		buffer = deldollar(str, STATE_GENERAL);
-		return (buffer);
-	}
+		return (buffer = ft_strdup(str), buffer);
 	return (NULL);
 }
 
@@ -74,7 +71,7 @@ static char	*expand_unit(char *str, char *env[], int exit_status, int state)
 			if (buffer)
 				return (free(str), buffer);
 			else
-				return (str);
+				return (printf("returned -> %s\n", str), str);
 		}
 		i++;
 	}
