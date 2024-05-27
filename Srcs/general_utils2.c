@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:13:21 by mawad             #+#    #+#             */
-/*   Updated: 2024/03/04 17:51:38 by mawad            ###   ########.fr       */
+/*   Updated: 2024/05/27 17:19:08 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ static char	**pt_split(char	*str, int state, int size)
 	return (buffer);
 }
 
+//EXTRA: IT TURNS OUT I DONT NEED TO HANDLE THIS
+//ANYWAYS BECAUSE export $HEY="hi lol" is not
+//allowed in bash unless you say $HEY='\"hi lol\"
+//and backslashes don't have to be accounted for
+//as per the subject pdf. So technically, there
+//is no need to "split with quotes". Just expand
+//with the string while it still has quotes. Then,
+//after expansion, strip the quotes and that's it.
+//
 //If there are quotes, don't split because I want
 //to keep the spaces! The reason why I want to split
 //is because if an environment variable had spaces in
@@ -87,8 +96,8 @@ static char	**pt_split(char	*str, int state, int size)
 //arguments. So $HEY="hi lol", then command $HEY
 //would have 2 arguments, hi and lol. Not just one.
 //But I am using this function for all arguments,
-//regardless of whether they environemnt variables
-// to be expanded or not.
+//regardless of whether they are environemnt variables
+//to be expanded or not.
 //So, in that case, if I had an argument like
 //echo "hello world . " where there are no environ
 //variables, then I don't want it to actually

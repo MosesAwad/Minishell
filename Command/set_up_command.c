@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 23:33:31 by mawad             #+#    #+#             */
-/*   Updated: 2024/03/04 18:10:33 by mawad            ###   ########.fr       */
+/*   Updated: 2024/05/27 17:25:05 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ static int	check_empty_expand(t_minishell *shell, char *str)
 	return (free(expansion), 0);
 }
 
+//Upon reviewing the subject pdf, I noticed that I technically don't
+//need to expand the string whilst maintaining the quotes via the
+//function q_expand_str; then proceed to splitting the line (where 
+//the delimeter is any whitespace) whilst mainting the quotes; and then
+//strip the string of the quotes. That's unecessary, you can just straight
+//up check if the expansion is empty, if it is not, then just expand the
+//string and strip the quotes. No need for split_with_quotes(). 
+//If you're intersted, I explain above split_with_quotes() function
+//why this is no longer necessary.
 static void	copy_cmd_args(t_ASTree *node, t_minishell *shell, t_command *cmd)
 {
 	char	*expansion;
