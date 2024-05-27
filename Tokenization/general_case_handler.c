@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 23:53:37 by mawad             #+#    #+#             */
-/*   Updated: 2024/03/03 10:42:39 by mawad            ###   ########.fr       */
+/*   Updated: 2024/05/27 12:56:05 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static int	stopper(char c)
 	return (0);
 }
 
-//white spaces are only allowed in between quotes so I need to
-//handle that scenario
+//white spaces are only inserted into the "data" of the
+//tok list if they are in between quote; otherwise, we
+//skip them. So I need to take this issue into account
 int	general_case_handler(t_token *tok_node, char *str, int j)
 {
 	int	state;

@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:20:34 by mawad             #+#    #+#             */
-/*   Updated: 2024/03/05 12:20:10 by mawad            ###   ########.fr       */
+/*   Updated: 2024/05/27 12:44:10 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,23 @@ void	ft_sighandler(int sig)
 		g_sigstat = 130;
 		ft_dprintf(2, "^C\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_done = 1;
+		// rl_replace_line("", 0);
+		// rl_done = 1;
 	}
 	else if (g_sigstat == IN_HDOC)
 	{
 		g_sigstat = OUT_HDOC;
 		ft_dprintf(2, "\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_done = 1;
+		// rl_replace_line("", 0);
+		// rl_done = 1;
 	}
 }
 
 void	init_signals(void)
 {
-	rl_catch_signals = 0;
-	rl_event_hook = event;
+	// rl_catch_signals = 0;
+	// rl_event_hook = event;
 	signal(SIGINT, ft_sighandler);
 	signal(SIGQUIT, SIG_IGN);
 }
