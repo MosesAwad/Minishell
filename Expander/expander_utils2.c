@@ -12,11 +12,22 @@
 
 #include "../minishell.h"
 
+//stand_alone $ signs are $ signs that should not
+//be expanded.
+//	-- stand_alone examples --
+//Ex: echo $ -> $
+//Ex: echo $ lol -> $ lol
+//Ex: echo "$ hi" -> $ hi
+//Ex: echo "haha $" -> haha
+//
+//	-- Non-Stand_alone examples --
+//Ex: echo $"lmfao" -> lmfao
+//Ex: echo $NONEXISTENT_ENVAR lmfao -> lmfao
 static int	bool_stand_alone(char c, int state)
 {
 	if (is_wspace(c) || c == '\0' || (c == '"'
 			&& state == IN_DQUOTE))
-		return (1);
+		return (printf("stand_alone\n"), 1);
 	return (0);
 }
 
