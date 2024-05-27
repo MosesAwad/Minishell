@@ -81,6 +81,11 @@ static char	*expand_unit(char *str, char *env[], int exit_status, int state)
 	return (str);
 }
 
+//Targets are the $ signs that are meant to be expanded.
+//Not every $ sign has to be expanded. To see which ones
+//do not get expanded, head on over to expander_utils2.c
+//and read the comment above the bool_stand_alone() function.
+//It has an explanation.
 static int	count_targets(char *str)
 {
 	int	i;

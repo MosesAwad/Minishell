@@ -15,11 +15,15 @@
 //stand_alone $ signs are $ signs that should not
 //be expanded.
 //	-- stand_alone examples --
-//Ex: echo $ -> $
-//Ex: echo $ lol -> $ lol
-//Ex: echo "$ hi" -> $ hi
-//Ex: echo "haha $" -> haha
-//
+//Ex: echo $ -> $ ($ followed by a \0 in the token)
+//Ex: echo $ lol -> $ lol ($ followed by a \0 in the token)
+//Ex: echo "$ hi" -> $ hi ($ followed by a whitespace)
+//Ex: echo "haha $" -> haha ($ followed by a " within the double
+//quote state)
+//In addition to that, any $ sign within single quotes should
+//never be expanded no matter what.
+//Any other $ sign scenario, I consider as "non-stand_alone" and
+//here are just two basic examples.
 //	-- Non-Stand_alone examples --
 //Ex: echo $"lmfao" -> lmfao
 //Ex: echo $NONEXISTENT_ENVAR lmfao -> lmfao
