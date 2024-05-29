@@ -25,6 +25,18 @@ t_ASTree	*smpl_command(t_token **token_list)
 	return (NULL);
 }
 
+//The reason why I manually say argnode->right = argrightnode, even
+//though the changes applied to argnode by the push_rdlst_up function
+//should have also been reflected here, is because the last line
+//of the push_rdlst_up function	[store_right = get_right_node(node);]
+//actually copies that node and then deletes it! That is just due to
+//its recursive nature. That's the way it should work for all the lower
+//layers but once it gets to the topmost layer, even though it builds it
+//right, it also deletes it because it had to delete it for the lower
+//layers too. Even though it deleted it, we still have it stored and
+//returned. So it's no big deal, the  push_rdlst_up function returns it
+//into the argrightnode variable in this function. Then we reassign it
+//to argnode->right. Simple!
 static t_ASTree	*get_arg_node(t_token **token_list, t_ASTree **rdrlistnode)
 {
 	t_ASTree	*argnode;

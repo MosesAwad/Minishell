@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:11:59 by moses             #+#    #+#             */
-/*   Updated: 2024/03/04 19:51:19 by mawad            ###   ########.fr       */
+/*   Updated: 2024/05/28 16:10:58 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 	// <token list>				::=		<token> <redirection list> <token list>
 	// 							|		(EMPTY)
 
-	//<redirection list1>		::=     <redirection> <redirection list>
+	// <redirection list1>		::=     <redirection> <redirection list>
 	//							|   	(EMPTY)
 
-	//<redirection list2>   	::=     <redirection> <redirection list>
+	// <redirection list2>   	::=     <redirection> <redirection list>
 
 	//	<redirection>			::=		'<' <filename>
 	//							|   	'>' <filename>
