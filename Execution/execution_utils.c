@@ -83,6 +83,8 @@ int	call_built_ins(t_minishell *shell, t_command *command)
 	return (0);
 }
 
+// 		--- cmd->pids[i] == -2 EXPLANATION ---
+//
 // When we have a pipeline that contains built-in
 // functions, we cannot use waitpid to wait on them
 // because they are not forked. So, whenever we have
@@ -109,6 +111,19 @@ int	call_built_ins(t_minishell *shell, t_command *command)
 // simple and just skip the waitpid() call on any of the
 // built-in functions by just setting the index pids[i] to -2 for
 // that particular command in the pipeline.
+//
+//
+//		--- stat_flag EXPLANATION ---
+// stat_flag is pretty easy to understand. If I am executing a
+// built-in function, then I set stat_flag to 0. Otherwise, I set
+// it to 1. If it is 1, that means that it was executed via execve
+// and so, I let the waitpid function return the automatically 
+// generated exit status to save_status (and subsequently to
+// shell->status). Otherwise, if the function was a built-in 
+// function, then, I leave the shell->exit_status untouched in the
+// waiter function because my built-in functions themselves would
+// have handled the exit status automatically (that's the way I
+// designed the code).
 void	waiter(t_minishell *shell, t_command *cmd,
 				int proc_count, int stat_flag)
 {
