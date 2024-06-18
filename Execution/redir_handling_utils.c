@@ -62,6 +62,8 @@ void	init_delims_and_file_arr(t_ASTree *rdrnode, t_command *cmd)
 		cmd->delims = (char **)malloc(sizeof(char *) * (cmd->hdoc_amnt + 1));
 }
 
+// Remember, if the file has any issues, open would automatically
+// return -1 to fd.
 int	assign_fds(t_ASTree *rdrnode, char *str)
 {
 	int	fd;

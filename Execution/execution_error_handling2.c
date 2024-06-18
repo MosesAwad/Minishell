@@ -12,6 +12,55 @@
 
 #include "../minishell.h"
 
+// If execve fails (for instance if the command is not found),
+// then we head back to the rest of the code but within the child
+// process! It would be a fiasco, it's like we would go into another
+// minishell process simultaneously, and the main parent process would
+// continue to wait for it. It is just very poor practice if left
+// unhandled.
+// 
+// One other thing you might notice is that when you attempt to handle
+// the execve errors by printing a message, like "minishell: X command
+// not found" and you had an output redirection in that command, that
+// error message would go to the outfile instead of the STDOUT. That's
+// because you have done dup2(outfile_fd, STDOUT_FILENO) so the STDOUT
+// now refers to the file description of outfile_fd and no longer the
+// stdout. So what you could do instead one of two things:
+//		1. print the error message to STDERR_FILENO instead
+//		2. save your stdout fd to a variable which I called
+//			cmd->save_stdout and dup the STDOUT_FILENO back
+//			to the cmd->save_stdout by saying
+//			dup2(cmd->save_stdout, STDOUT_FILENO). But this
+//			option is kinda bad. Because it is standard practice
+//			to output errors to STDERR anyways. Additionaly, the
+//			minishell tester would accept your error handling
+//			only if it is printed to STDERR. So even if the error
+//			message was handled correctly, the tester would give
+//			you a KO. Lastly, I can't remember why exactly but this
+//			option also gave me an fd_leak that I was unable to solve.
+//
+// 
+// Because I was initally trying to go for option 2, you can see the
+// remnants of this method in the following lines of my code:
+// 		dup2(cmd->save_stdout, STDOUT_FILENO);
+// 		dup2(cmd->save_stdin, STDIN_FILENO);
+// 		close(cmd->save_stdout);
+// 		close(cmd->save_stdin);
+// Technically this is unecessary now as you don't really need to
+// save stdout and stdin when you use execve (even if it fails) 
+// because we will always be within a child process that HAS to be
+// exited. Nevertheless, you would still need to save your stdout and
+// stdin for when you use built-in functions; but here, it is uneccesary
+// because we will always be running a child process if the command is
+// not a built-in. So technically, you would only have to
+// cmd->save_stdout = dup(STDOUT_FILENO) and 
+// cmd->save_stdin = dup(STDIN_FILENO) when you detect a built-in function.
+// In my code though, I unecessarily save them everytime.
+//
+//
+// Lastly, just for additional info, ERRNO 13 is the EACCESS error which 
+// is the Permission Denied error (can read more about this error code in
+// man execve).
 void	handle_execve_error(t_minishell *shell, t_command *cmd)
 {
 	int	exit_code;

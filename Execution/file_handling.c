@@ -24,7 +24,7 @@
 //[echo "hello" >$HI] then it would say ambigous redirect
 //because HI expanded into [hey ho] but since there is a space, it
 //doesn't know what to do and says ambigous redirect. But if we
-//do [echo "hello" >"$HI"], then HI expanded into []"hey ho"] and
+//do [echo "hello" >"$HI"], then HI expanded into ["hey ho"] and
 //now, it actually finds our directory called 'hey ho' and says
 //[bash: hey ho: Is a directory]. This issue only arises when
 //we have an environ that expands to dir name with a space in it.
@@ -55,6 +55,11 @@ static void	dir_handle_err_msg(t_minishell *shell, char *expnd,
 	free(expnd);
 }
 
+// This is to handle cases where the environment variable is not
+// found in the envar list. So let's say you never did
+// export TROLL=whatever. If you do echo hello >$TROLL then you
+// would get ambigous redirect and if you do echo hello >"$TROLL"
+// then you would get No such file or directory.
 static void	file_handle_err_msg(t_minishell *shell, char *expnd,
 									t_ASTree *rdrnode)
 {
@@ -78,6 +83,7 @@ static void	file_handle_err_msg(t_minishell *shell, char *expnd,
 	free(expnd);
 }
 
+// The cmd->files[i].fd == -3 check is a remnant of older code so ignore it.
 static int	file_handling_helper(t_command *cmd, t_minishell *shell,
 									char **expnd, t_ASTree **rdrnode)
 {
