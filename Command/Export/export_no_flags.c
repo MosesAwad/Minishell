@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:01:24 by mawad             #+#    #+#             */
-/*   Updated: 2024/03/05 12:11:16 by mawad            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:26:34 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static char	**copy_envlist(char *env[])
 	return (buffer);
 }
 
-void	alphabetic_order(char **elist, int (*in_order)())
+void	alphabetic_order(char **elist,
+			int (*in_order)(char *str1, char *str2))
 {
 	int		size;
 	int		i;
