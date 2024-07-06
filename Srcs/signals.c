@@ -6,7 +6,7 @@
 /*   By: mawad <mawad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:20:34 by mawad             #+#    #+#             */
-/*   Updated: 2024/07/04 17:58:08 by mawad            ###   ########.fr       */
+/*   Updated: 2024/07/06 22:25:22 by mawad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void	ft_sighandler(int sig)
 	}
 }
 
+// Without rl_catch_sigals = 0, then when we hit ctrl + C
+// in the shell prompt, it would display ^C and if we hit
+// ctrl + \ it would display ^\. So to avoid that, we use
+// the rl_catch_sigals = 0, which is basically like
+// SIG_IGN for the readline library. 
 void	init_signals(void)
 {
 	rl_catch_signals = 0;
