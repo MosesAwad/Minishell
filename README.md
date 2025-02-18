@@ -1,7 +1,5 @@
 # 🐚 Minishell - My Own Little Bash
 
-![Shell Banner](https://i.imgur.com/placeholder-shell-banner.png)
-
 ## Overview
 
 Minishell is a custom implementation of a simplified bash shell, written entirely in C. This project challenged me to understand the intricacies of process management, file descriptors, command parsing, and system call execution - essentially recreating the core functionality of one of computing's most fundamental tools.
@@ -38,10 +36,10 @@ One of the biggest challenges of this project was implementing an **Abstract Syn
 - Robust error handling and syntax validation
 
 ```
-         Pipe
-     /         \
+        Pipe
+     /        \
   Cmd         Cmd
-  /          /    \
+  /          /   \
 Arg        Arg    Redirect
 ```
 
